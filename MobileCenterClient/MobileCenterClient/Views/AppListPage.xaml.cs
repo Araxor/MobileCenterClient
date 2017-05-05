@@ -13,6 +13,9 @@ namespace MobileCenterClient.Views
 		public AppListPage()
 		{
 			InitializeComponent();
+            
+            // Disable selection on AppsListView items
+		    AppsListView.ItemSelected += (sender, args) => ((ListView) sender).SelectedItem = null;
 		}
 	}
 }

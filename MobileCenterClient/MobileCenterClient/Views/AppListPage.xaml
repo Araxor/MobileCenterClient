@@ -1,21 +1,32 @@
 ﻿<?xml version="1.0" encoding="utf-8" ?>
-<views:BasePage xmlns="http://xamarin.com/schemas/2014/forms"
+<v:BasePage xmlns="http://xamarin.com/schemas/2014/forms"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              xmlns:local="clr-namespace:MobileCenterClient"
-             xmlns:viewModels="clr-namespace:MobileCenterClient.ViewModels"
-             xmlns:views="clr-namespace:MobileCenterClient.Views;assembly=MobileCenterClient.iOS"
+             xmlns:vm="clr-namespace:MobileCenterClient.ViewModels"
+             xmlns:v="clr-namespace:MobileCenterClient.Views"
+             xmlns:b="clr-namespace:Corcav.Behaviors;assembly=Corcav.Behaviors"
              x:Class="MobileCenterClient.Views.AppListPage">
     
-    <views:BasePage.BindingContext>
-        <viewModels:AppListViewModel/>
-    </views:BasePage.BindingContext>
+    <v:BasePage.BindingContext>
+        <vm:AppListViewModel/>
+    </v:BasePage.BindingContext>
     
-    <ListView ItemsSource="{Binding Apps}">
+    <ListView x:Name="AppsListView"
+              ItemsSource="{Binding Apps}"
+              SelectedItem="{Binding SelectedApp, Mode=TwoWay}">
+        
+        <b:Interaction.Behaviors>
+            <b:BehaviorCollection>
+                <b:EventToCommand EventName="ItemTapped" Command="{Binding ViewAppCommand}"/>
+            </b:BehaviorCollection>
+        </b:Interaction.Behaviors>
+        
         <ListView.ItemTemplate>
             <DataTemplate>
-                <TextCell Text="{Binding DisplayName}"/>
+                <TextCell Text="{Binding DisplayName}"
+                           Detail="{Binding Description}"/>
             </DataTemplate>
         </ListView.ItemTemplate>
     </ListView>
 
-</views:BasePage>
+</v:BasePage>
