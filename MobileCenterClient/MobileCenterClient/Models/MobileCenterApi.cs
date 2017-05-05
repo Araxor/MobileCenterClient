@@ -13,7 +13,7 @@ namespace MobileCenterClient.Models
     public class MobileCenterApi
     {
         public string Url { get; } = "https://api.mobile.azure.com";
-        private string Token { get; } = "c1779656bc180a231e1fed74147348850ab72fe8";
+        private string Token { get; } = "";
 
         private readonly HttpClient _client;
         private readonly JsonSerializerSettings _jsonSerializerSettings;
