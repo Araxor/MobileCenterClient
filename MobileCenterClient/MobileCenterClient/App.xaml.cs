@@ -13,7 +13,7 @@ namespace MobileCenterClient
 		{
 			InitializeComponent();
 
-			MainPage = new MobileCenterClient.MainPage();
+			MainPage = new MobileCenterClient.Views.AppListPage();
 		}
 
 		protected override void OnStart ()

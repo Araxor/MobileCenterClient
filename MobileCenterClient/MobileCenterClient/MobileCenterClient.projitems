@@ -12,12 +12,23 @@
     <Compile Include="$(MSBuildThisFileDirectory)App.xaml.cs">
       <DependentUpon>App.xaml</DependentUpon>
     </Compile>
-    <Compile Include="$(MSBuildThisFileDirectory)MainPage.xaml.cs">
-      <DependentUpon>MainPage.xaml</DependentUpon>
+    <Compile Include="$(MSBuildThisFileDirectory)Models\App.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Models\AppOwner.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Models\Exceptions\FailedHttpResponseException.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Models\MobileCenterApi.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Models\Exceptions\MobileCenterApiException.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Models\SnakeCasePropertyNamesContractResolver.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Models\UserProfile.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)ObservableObject.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)ViewModels\AppListViewModel.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)ViewModels\BaseViewModel.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Views\AppListPage.xaml.cs">
+      <DependentUpon>AppListPage.xaml</DependentUpon>
     </Compile>
+    <Compile Include="$(MSBuildThisFileDirectory)Views\BasePage.cs" />
   </ItemGroup>
   <ItemGroup>
-    <EmbeddedResource Include="$(MSBuildThisFileDirectory)MainPage.xaml">
+    <EmbeddedResource Include="$(MSBuildThisFileDirectory)Views\AppListPage.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
     </EmbeddedResource>

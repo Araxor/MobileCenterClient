@@ -1,0 +1,21 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<views:BasePage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:local="clr-namespace:MobileCenterClient"
+             xmlns:viewModels="clr-namespace:MobileCenterClient.ViewModels"
+             xmlns:views="clr-namespace:MobileCenterClient.Views;assembly=MobileCenterClient.iOS"
+             x:Class="MobileCenterClient.Views.AppListPage">
+    
+    <views:BasePage.BindingContext>
+        <viewModels:AppListViewModel/>
+    </views:BasePage.BindingContext>
+    
+    <ListView ItemsSource="{Binding Apps}">
+        <ListView.ItemTemplate>
+            <DataTemplate>
+                <TextCell Text="{Binding DisplayName}"/>
+            </DataTemplate>
+        </ListView.ItemTemplate>
+    </ListView>
+
+</views:BasePage>
