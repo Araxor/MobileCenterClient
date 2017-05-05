@@ -20,6 +20,7 @@
     <Compile Include="$(MSBuildThisFileDirectory)Models\SnakeCasePropertyNamesContractResolver.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Models\UserProfile.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)ObservableObject.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Secrets.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)ViewModels\AppListViewModel.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)ViewModels\BaseViewModel.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Views\AppListPage.xaml.cs">

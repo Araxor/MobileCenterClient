@@ -12,26 +12,29 @@ namespace MobileCenterClient.ViewModels
     public class AppListViewModel : BaseViewModel
     {
         private readonly MobileCenterApi _mobileCenterApi;
-        public List<Models.App> Apps { get; }
+        public ObservableCollection<Models.App> Apps { get; }
 
         public AppListViewModel()
         {
             _mobileCenterApi = new MobileCenterApi();
-            Apps = new List<Models.App>();
+            Apps = new ObservableCollection<Models.App>();
         }
 
         public override async void OnAppearing()
         {
             base.OnAppearing();
 
-            var newApps = await _mobileCenterApi.GetApps();
-            Apps.Clear();
-            Apps.AddRange(newApps);
+            await UpdateApps();
         }
 
-        private async Task<List<Models.App>> LoadApps()
+        private async Task UpdateApps()
         {
-            return await _mobileCenterApi.GetApps();
+            var newApps = await _mobileCenterApi.GetApps();
+            Apps.Clear();
+            foreach (var app in newApps)
+            {
+                Apps.Add(app);
+            }
         }
     }
 }

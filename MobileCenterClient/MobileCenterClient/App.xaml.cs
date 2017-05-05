@@ -5,6 +5,10 @@ using System.Text;
 
 using Xamarin.Forms;
 
+using Microsoft.Azure.Mobile;
+using Microsoft.Azure.Mobile.Analytics;
+using Microsoft.Azure.Mobile.Crashes;
+
 namespace MobileCenterClient
 {
 	public partial class App : Application
@@ -18,8 +22,11 @@ namespace MobileCenterClient
 
 		protected override void OnStart ()
 		{
-			// Handle when your app starts
-		}
+            // Handle when your app starts
+		    MobileCenter.Start("android="+Secrets.MobileCenterAndroidSecret+";" +
+                               "ios="+Secrets.MobileCenterIOsSecret,
+		                       typeof(Analytics), typeof(Crashes));
+        }
 
 		protected override void OnSleep ()
 		{
