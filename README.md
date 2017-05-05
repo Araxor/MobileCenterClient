@@ -18,5 +18,5 @@ A mobile client for Microsoft Azure Mobile Center.
 
 ## Build instructions
 
-You should add your API key in [Secret.cs](../blob/dev/MobileCenterClient/MobileCenterClient/Secrets.cs)) before building. 
+You should add your API key in [Secret.cs](../blob/dev/MobileCenterClient/MobileCenterClient/Secrets.cs) before building. 
 
