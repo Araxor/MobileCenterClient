@@ -45,6 +45,11 @@ namespace MobileCenterClient.Models
             return await GetResource<List<App>>("/v0.1/apps");
         }
 
+        public async Task<List<BranchStatus>> GetBranches(string ownerName, string appName)
+        {
+            return await GetResource<List<BranchStatus>>($"/v0.1/apps/{ownerName}/{appName}/branches");
+        }
+
         private async Task<T> GetResource<T>(string endpoint)
         {
             var response = await _client.GetAsync(endpoint);

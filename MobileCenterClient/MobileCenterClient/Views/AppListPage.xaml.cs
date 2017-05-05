@@ -15,7 +15,12 @@ namespace MobileCenterClient.Views
 			InitializeComponent();
             
             // Disable selection on AppsListView items
-		    AppsListView.ItemSelected += (sender, args) => ((ListView) sender).SelectedItem = null;
+		    AppsListView.ItemSelected += (sender, args) => 
+                ((ListView) sender).SelectedItem = null;
+
+            // Navigate to branch list view on tapped item
+            AppsListView.ItemTapped += async (sender, args) =>
+		        await Navigation.PushAsync(new BranchListPage((Models.App) args.Item));
 		}
 	}
 }

@@ -6,6 +6,7 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Input;
 using MobileCenterClient.Models;
+using MobileCenterClient.Views;
 using Xamarin.Forms;
 
 namespace MobileCenterClient.ViewModels
@@ -15,8 +16,6 @@ namespace MobileCenterClient.ViewModels
         private readonly MobileCenterApi _mobileCenterApi;
         
         public ObservableCollection<Models.App> Apps { get; }
-
-        public ICommand ViewAppCommand { get; } = new Command(() => {});
 
         public AppListViewModel()
         {

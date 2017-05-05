@@ -4,19 +4,15 @@
              xmlns:local="clr-namespace:MobileCenterClient"
              xmlns:vm="clr-namespace:MobileCenterClient.ViewModels"
              xmlns:v="clr-namespace:MobileCenterClient.Views"
-             x:Class="MobileCenterClient.Views.AppListPage">
-    
-    <v:BasePage.BindingContext>
-        <vm:AppListViewModel/>
-    </v:BasePage.BindingContext>
-    
-    <ListView x:Name="AppsListView"
-              ItemsSource="{Binding Apps}">
-       
+             x:Class="MobileCenterClient.Views.BranchListPage">
+
+    <ListView x:Name="BranchListView"
+              ItemsSource="{Binding Branches}">
+
         <ListView.ItemTemplate>
             <DataTemplate>
-                <TextCell Text="{Binding DisplayName}"
-                           Detail="{Binding Description}"/>
+                <TextCell Text="{Binding Branch.Name}"
+                          Detail="{Binding Configured}"/>
             </DataTemplate>
         </ListView.ItemTemplate>
     </ListView>

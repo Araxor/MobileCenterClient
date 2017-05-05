@@ -118,7 +118,7 @@ namespace MobileCenterClient.Models
             }
         }
 
-        public AppOwner AppOwner
+        public AppOwner Owner
         {
             get => _appOwner;
             set
