@@ -7,7 +7,7 @@ namespace MobileCenterClient.Models
     public class Branch : ObservableObject
     {
         private string _name;
-        private Commit _commit;
+        private CommitDetails _commit;
 
         public string Name
         {
@@ -20,7 +20,7 @@ namespace MobileCenterClient.Models
             }
         }
 
-        public Commit Commit
+        public CommitDetails Commit
         {
             get => _commit;
             set

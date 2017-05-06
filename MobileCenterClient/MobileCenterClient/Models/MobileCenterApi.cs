@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Diagnostics;
+using System.Linq;
 using System.Net;
 using System.Net.Http;
 using System.Threading.Tasks;
@@ -64,7 +65,25 @@ namespace MobileCenterClient.Models
 
         public async Task<List<BranchStatus>> GetBranches(string ownerName, string appName)
         {
-            return await GetResource<List<BranchStatus>>($"/v0.1/apps/{ownerName}/{appName}/branches", PascalCaseSerializerSettings);
+            var branches = await GetResource<List<BranchStatus>>($"/v0.1/apps/{ownerName}/{appName}/branches",
+                PascalCaseSerializerSettings);
+
+            // Retrieve full commit info for each branch
+            Parallel.ForEach(branches, async branch =>
+            {
+                if (branch.Branch.Commit.Commit == null)
+                    branch.Branch.Commit = await GetCommitDetails(ownerName, appName, branch.Branch.Commit.Sha);
+            });
+
+            return branches;
+        }
+
+        public async Task<CommitDetails> GetCommitDetails(string ownerName, string appName, string shaHash)
+        {
+            var commitDetailsList = await GetResource<List<CommitDetails>>(
+                $"/v0.1/apps/{ownerName}/{appName}/commits/batch?hashes={shaHash}",
+                PascalCaseSerializerSettings);
+            return commitDetailsList.FirstOrDefault();
         }
 
         private async Task<T> GetResource<T>(string endpoint, JsonSerializerSettings serializerSettings)

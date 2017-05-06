@@ -16,9 +16,19 @@
         <ListView.ItemTemplate>
             <DataTemplate>
                 <ViewCell>
-                    <StackLayout Orientation="Horizontal">
-                        <Label Text="{Binding Branch.Name}"/>
-                        <Label Text="{Binding Status}"/>
+                    <StackLayout Orientation="Vertical" Padding="5,10">
+                        <Label Text="{Binding Branch.Name}" FontAttributes="Bold" FontSize="22"/>
+                        <StackLayout Orientation="Horizontal">
+                            <Label Text="Build status:"/>
+                            <Label Text="{Binding Status}" FontAttributes="Italic"/>
+                        </StackLayout>
+                        
+                        <Label Text="Last commit:"/>
+                        <StackLayout Orientation="Vertical" Padding="5,0">
+                            <Label Text="{Binding Branch.Commit.Commit.Message}" FontAttributes="Italic"/>
+                            <Label Text="{Binding Branch.Commit.Commit.Author.Name}" FontAttributes="Italic"/>
+                            <Label Text="{Binding Branch.Commit.Commit.Author.Date}" FontAttributes="Italic"/>
+                        </StackLayout>
                     </StackLayout>
                 </ViewCell>
             </DataTemplate>

@@ -6,29 +6,24 @@ namespace MobileCenterClient.Models
 {
     public class Commit : ObservableObject
     {
-        private string _sha;
-        private string _url;
+        private string _message;
+        private Author _author;
 
-        public string Sha
+        public string Message
         {
-            get => _sha;
+            get => _message;
             set
             {
-                if (value == _sha) return;
-                _sha = value;
+                if (value == _message) return;
+                _message = value;
                 OnPropertyChanged();
             }
         }
 
-        public string Url
+        public Author Author
         {
-            get => _url;
-            set
-            {
-                if (value == _url) return;
-                _url = value;
-                OnPropertyChanged();
-            }
+            get { return _author; }
+            set { _author = value; }
         }
     }
 }
