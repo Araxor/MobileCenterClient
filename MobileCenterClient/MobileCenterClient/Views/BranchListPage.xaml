@@ -6,7 +6,6 @@
              xmlns:v="clr-namespace:MobileCenterClient.Views"
              x:Class="MobileCenterClient.Views.BranchListPage">
     
-
     <ListView x:Name="BranchListView"
               ItemsSource="{Binding Branches}"
               IsPullToRefreshEnabled="True"

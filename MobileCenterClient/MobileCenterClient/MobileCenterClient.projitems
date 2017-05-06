@@ -12,6 +12,7 @@
     <Compile Include="$(MSBuildThisFileDirectory)App.xaml.cs">
       <DependentUpon>App.xaml</DependentUpon>
     </Compile>
+    <Compile Include="$(MSBuildThisFileDirectory)ExtensionMethods\DictionaryExtensions.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)ExtensionMethods\StringExtensions.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Messages.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Models\App.cs" />
