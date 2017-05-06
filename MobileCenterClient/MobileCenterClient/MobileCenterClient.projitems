@@ -12,6 +12,7 @@
     <Compile Include="$(MSBuildThisFileDirectory)App.xaml.cs">
       <DependentUpon>App.xaml</DependentUpon>
     </Compile>
+    <Compile Include="$(MSBuildThisFileDirectory)ExtensionMethods\StringExtensions.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Messages.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Models\App.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Models\AppOwner.cs" />
@@ -23,7 +24,8 @@
     <Compile Include="$(MSBuildThisFileDirectory)Models\Exceptions\FailedHttpResponseException.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Models\MobileCenterApi.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Models\Exceptions\MobileCenterApiException.cs" />
-    <Compile Include="$(MSBuildThisFileDirectory)Models\SnakeCasePropertyNamesContractResolver.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Models\JsonContractResolvers\PascalCasePropertyNamesContractResolver.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Models\JsonContractResolvers\SnakeCasePropertyNamesContractResolver.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Models\UserProfile.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)ObservableObject.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Secrets.cs" />
@@ -51,5 +53,8 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
     </EmbeddedResource>
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="$(MSBuildThisFileDirectory)Models\JsonContractResolvers\" />
   </ItemGroup>
 </Project>

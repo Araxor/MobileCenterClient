@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.Net;
 using System.Net.Http;
 using System.Threading.Tasks;
@@ -17,8 +18,12 @@ namespace MobileCenterClient.Models
         private string Token { get; } = Secrets.MobileCenterApiKey;
 
         private readonly HttpClient _client;
-        private readonly JsonSerializerSettings _jsonSerializerSettings;
+        public JsonSerializerSettings SnakeCaseSerializerSettings { get; }
+        public JsonSerializerSettings PascalCaseSerializerSettings { get; }
 
+#if DEBUG
+        private ITraceWriter traceWriter = new MemoryTraceWriter();
+#endif
 
         public MobileCenterApi()
         {
@@ -29,28 +34,40 @@ namespace MobileCenterClient.Models
                 DefaultRequestHeaders = { {"X-API-Token", Token} }
             };
 
-            _jsonSerializerSettings = new JsonSerializerSettings()
+            SnakeCaseSerializerSettings = new JsonSerializerSettings()
             {
                 ContractResolver = new SnakeCasePropertyNamesContractResolver()
+#if DEBUG
+                ,TraceWriter = traceWriter
+#endif
+            };
+
+            PascalCaseSerializerSettings = new JsonSerializerSettings()
+            {
+                ContractResolver = new PascalCasePropertyNamesContractResolver()
+#if DEBUG
+                ,
+                TraceWriter = traceWriter
+#endif
             };
         }
 
         public async Task<UserProfile> GetUserProfile()
         {
-            return await GetResource<UserProfile>("/v0.1/user");
+            return await GetResource<UserProfile>("/v0.1/user", SnakeCaseSerializerSettings);
         }
 
         public async Task<List<App>> GetApps()
         {
-            return await GetResource<List<App>>("/v0.1/apps");
+            return await GetResource<List<App>>("/v0.1/apps", SnakeCaseSerializerSettings);
         }
 
         public async Task<List<BranchStatus>> GetBranches(string ownerName, string appName)
         {
-            return await GetResource<List<BranchStatus>>($"/v0.1/apps/{ownerName}/{appName}/branches");
+            return await GetResource<List<BranchStatus>>($"/v0.1/apps/{ownerName}/{appName}/branches", PascalCaseSerializerSettings);
         }
 
-        private async Task<T> GetResource<T>(string endpoint)
+        private async Task<T> GetResource<T>(string endpoint, JsonSerializerSettings serializerSettings)
         {
             HttpResponseMessage response;
             try
@@ -68,7 +85,13 @@ namespace MobileCenterClient.Models
 
             var content = await response.Content.ReadAsStringAsync();
 
-            return JsonConvert.DeserializeObject<T>(content, _jsonSerializerSettings);
+            var deserialized = JsonConvert.DeserializeObject<T>(content, serializerSettings);
+
+#if DEBUG
+            Debug.WriteLine(traceWriter);
+#endif
+
+            return deserialized;
         }
     }
 }

@@ -1,6 +1,8 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Text;
+using MobileCenterClient.ExtensionMethods;
+using Newtonsoft.Json;
 
 namespace MobileCenterClient.Models
 {
@@ -10,6 +12,8 @@ namespace MobileCenterClient.Models
         private bool _configured;
         private Build _lastBuild;
         private string _trigger;
+
+        public BranchStatus() {}
 
         public Branch Branch
         {
@@ -36,7 +40,7 @@ namespace MobileCenterClient.Models
         public Build LastBuild
         {
             get => _lastBuild;
-            set
+            set 
             {
                 if (value == _lastBuild) return;
                 _lastBuild = value;
@@ -52,6 +56,15 @@ namespace MobileCenterClient.Models
                 if (value == _trigger)
                 _trigger = value;
                 OnPropertyChanged();
+            }
+        }
+
+        public string Status
+        {
+            get
+            {
+                if (!Configured) return "Not configured";
+                return LastBuild.Status.FirstCharToUpper();
             }
         }
     }

@@ -5,14 +5,22 @@
              xmlns:vm="clr-namespace:MobileCenterClient.ViewModels"
              xmlns:v="clr-namespace:MobileCenterClient.Views"
              x:Class="MobileCenterClient.Views.BranchListPage">
+    
 
     <ListView x:Name="BranchListView"
-              ItemsSource="{Binding Branches}">
+              ItemsSource="{Binding Branches}"
+              IsPullToRefreshEnabled="True"
+              RefreshCommand="{Binding RefreshBranchesCommand}"
+              IsRefreshing="{Binding Refreshing}">
 
         <ListView.ItemTemplate>
             <DataTemplate>
-                <TextCell Text="{Binding Branch.Name}"
-                          Detail="{Binding Configured}"/>
+                <ViewCell>
+                    <StackLayout Orientation="Horizontal">
+                        <Label Text="{Binding Branch.Name}"/>
+                        <Label Text="{Binding Status}"/>
+                    </StackLayout>
+                </ViewCell>
             </DataTemplate>
         </ListView.ItemTemplate>
     </ListView>

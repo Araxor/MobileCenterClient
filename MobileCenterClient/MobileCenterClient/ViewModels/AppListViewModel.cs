@@ -38,7 +38,7 @@ namespace MobileCenterClient.ViewModels
             _mobileCenterApi = new MobileCenterApi();
             Apps = new ObservableCollection<Models.App>();
 
-            RefreshAppsCommand = new Command(OnRefreshAppsCommand);
+            RefreshAppsCommand = new Command(async () => await UpdateApps());
         }
 
         public override async void OnAppearing()
@@ -48,11 +48,6 @@ namespace MobileCenterClient.ViewModels
             {
                 await UpdateApps();
             }
-        }
-
-        public async void OnRefreshAppsCommand()
-        {
-            await UpdateApps();
         }
 
         private async Task UpdateApps()

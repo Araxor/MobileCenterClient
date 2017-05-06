@@ -6,6 +6,7 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Input;
 using MobileCenterClient.Models;
+using MobileCenterClient.Models.MobileCenter;
 using Xamarin.Forms;
 
 namespace MobileCenterClient.ViewModels
@@ -16,31 +17,58 @@ namespace MobileCenterClient.ViewModels
         private readonly Models.App _app;
         
         public ObservableCollection<Models.BranchStatus> Branches { get; }
+        public ICommand RefreshBranchesCommand { get; }
 
-        public ICommand ViewAppCommand { get; } = new Command(() => {});
+        private bool _refreshing = false;
+        public bool Refreshing
+        {
+            get => _refreshing;
+            private set
+            {
+                if (value == _refreshing) return;
+                _refreshing = value;
+                OnPropertyChanged();
+            }
+        }
 
         public BranchListViewModel(Models.App app)
         {
             _mobileCenterApi = new MobileCenterApi();
             Branches = new ObservableCollection<Models.BranchStatus>();
             _app = app;
+
+            RefreshBranchesCommand = new Command(async () => await UpdateBranches());
         }
 
         public override async void OnAppearing()
         {
             base.OnAppearing();
-
-           await UpdateBranches();
+            await UpdateBranches();
         }
 
         private async Task UpdateBranches()
         {
-            var newBranches = await _mobileCenterApi.GetBranches(_app.Owner.Name, _app.Name);
+            Refreshing = true;
+
+            List<BranchStatus> newBranches;
+            try
+            {
+                newBranches = await _mobileCenterApi.GetBranches(_app.Owner.Name, _app.Name);
+            }
+            catch (MobileCenterApiException e)
+            {
+                MessagingCenter.Send(this, Messages.ApiConnectionError);
+                Refreshing = false;
+                return;
+            }
+
             Branches.Clear();
             foreach (var branch in newBranches)
             {
                 Branches.Add(branch);
             }
+
+            Refreshing = false;
         }
     }
 }

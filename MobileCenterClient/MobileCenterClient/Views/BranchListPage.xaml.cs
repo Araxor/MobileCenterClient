@@ -18,7 +18,15 @@ namespace MobileCenterClient.Views
 		    BranchListView.ItemSelected += (sender, args) => ((ListView) sender).SelectedItem = null;
 
 		    BindingContext = new BranchListViewModel(app);
-        }
+
+	        // Subscribe to connection error message from the viewModel
+	        MessagingCenter.Subscribe<BranchListViewModel>(this, Messages.ApiConnectionError, OnApiConnectionError);
+	    }
+
+	    private void OnApiConnectionError(BranchListViewModel viewModel)
+	    {
+	        DisplayAlert("Connection error", "Cannot connect to Mobile Center API.", "OK");
+	    }
 
         protected override bool OnBackButtonPressed()
 	    {

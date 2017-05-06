@@ -28,7 +28,7 @@ namespace MobileCenterClient.Views
 
 	    private void OnApiConnectionError(AppListViewModel viewModel)
 	    {
-	        DisplayAlert("Connecion error", "Cannot connect to Mobile Center API.", "OK");
+	        DisplayAlert("Connection error", "Cannot connect to Mobile Center API.", "OK");
 	    }
 	}
 }
