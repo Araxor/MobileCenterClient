@@ -4,7 +4,8 @@
              xmlns:local="clr-namespace:MobileCenterClient"
              xmlns:vm="clr-namespace:MobileCenterClient.ViewModels"
              xmlns:v="clr-namespace:MobileCenterClient.Views"
-             x:Class="MobileCenterClient.Views.BranchListPage">
+             x:Class="MobileCenterClient.Views.BranchListPage"
+             Title="{Binding PageTitle}">
     
     <ListView x:Name="BranchListView"
               ItemsSource="{Binding Branches}"

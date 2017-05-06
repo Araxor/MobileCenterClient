@@ -13,9 +13,9 @@ namespace MobileCenterClient.ViewModels
 {
     public class BranchListViewModel : BaseViewModel
     {
-        private readonly MobileCenterApi _mobileCenterApi;
-        private readonly Models.App _app;
-        
+        public MobileCenterApi Api { get; }
+        public Models.App App { get; }
+
         public ObservableCollection<Models.BranchStatus> Branches { get; }
         public ICommand RefreshBranchesCommand { get; }
 
@@ -31,11 +31,13 @@ namespace MobileCenterClient.ViewModels
             }
         }
 
+        public string PageTitle => $"{App.Name} branches";
+
         public BranchListViewModel(Models.App app)
         {
-            _mobileCenterApi = new MobileCenterApi();
+            Api = new MobileCenterApi();
             Branches = new ObservableCollection<Models.BranchStatus>();
-            _app = app;
+            App = app;
 
             RefreshBranchesCommand = new Command(async () => await UpdateBranches());
         }
@@ -53,7 +55,7 @@ namespace MobileCenterClient.ViewModels
             List<BranchStatus> newBranches;
             try
             {
-                newBranches = await _mobileCenterApi.GetBranches(_app.Owner.Name, _app.Name);
+                newBranches = await Api.GetBranches(App.Owner.Name, App.Name);
             }
             catch (MobileCenterApiException e)
             {
