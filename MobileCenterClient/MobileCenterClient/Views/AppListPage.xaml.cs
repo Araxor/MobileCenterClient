@@ -21,6 +21,14 @@ namespace MobileCenterClient.Views
             // Navigate to branch list view on tapped item
             AppsListView.ItemTapped += async (sender, args) =>
 		        await Navigation.PushAsync(new BranchListPage((Models.App) args.Item));
+
+            // Subscribe to connection error message from the viewModel
+            MessagingCenter.Subscribe<AppListViewModel>(this, Messages.ApiConnectionError, OnApiConnectionError);
 		}
+
+	    private void OnApiConnectionError(AppListViewModel viewModel)
+	    {
+	        DisplayAlert("Connecion error", "Cannot connect to Mobile Center API.", "OK");
+	    }
 	}
 }

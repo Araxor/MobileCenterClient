@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Net;
 using System.Net.Http;
 using System.Threading.Tasks;
+using MobileCenterClient.Models.Exceptions;
 using MobileCenterClient.Models.MobileCenter.Exceptions;
 using Newtonsoft.Json;
 using Newtonsoft.Json.Serialization;
@@ -27,7 +28,6 @@ namespace MobileCenterClient.Models
                 BaseAddress = new Uri(Url),
                 DefaultRequestHeaders = { {"X-API-Token", Token} }
             };
-//            _client.DefaultRequestHeaders.Add("X-API-Token", Token);
 
             _jsonSerializerSettings = new JsonSerializerSettings()
             {
@@ -52,12 +52,22 @@ namespace MobileCenterClient.Models
 
         private async Task<T> GetResource<T>(string endpoint)
         {
-            var response = await _client.GetAsync(endpoint);
+            HttpResponseMessage response;
+            try
+            {
+                response = await _client.GetAsync(endpoint);
+            }
+            catch (HttpRequestException)
+            {
+                throw new FailedHttpRequestException(endpoint);
+            }
 
             if (!response.IsSuccessStatusCode)
                 throw new FailedHttpResponseException(response);
 
+
             var content = await response.Content.ReadAsStringAsync();
+
             return JsonConvert.DeserializeObject<T>(content, _jsonSerializerSettings);
         }
     }

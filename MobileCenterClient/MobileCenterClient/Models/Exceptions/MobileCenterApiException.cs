@@ -4,5 +4,5 @@ using System.Text;
 
 namespace MobileCenterClient.Models.MobileCenter
 {
-    class MobileCenterApiException : Exception {}
+    public class MobileCenterApiException : Exception {}
 }

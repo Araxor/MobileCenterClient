@@ -12,12 +12,14 @@
     <Compile Include="$(MSBuildThisFileDirectory)App.xaml.cs">
       <DependentUpon>App.xaml</DependentUpon>
     </Compile>
+    <Compile Include="$(MSBuildThisFileDirectory)Messages.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Models\App.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Models\AppOwner.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Models\Branch.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Models\BranchStatus.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Models\Build.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Models\Commit.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Models\Exceptions\FailedHttpRequestException.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Models\Exceptions\FailedHttpResponseException.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Models\MobileCenterApi.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Models\Exceptions\MobileCenterApiException.cs" />

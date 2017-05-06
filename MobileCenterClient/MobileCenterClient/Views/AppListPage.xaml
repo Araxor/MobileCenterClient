@@ -11,12 +11,15 @@
     </v:BasePage.BindingContext>
     
     <ListView x:Name="AppsListView"
-              ItemsSource="{Binding Apps}">
+              ItemsSource="{Binding Apps}"
+              IsPullToRefreshEnabled="True"
+              RefreshCommand="{Binding RefreshAppsCommand}"
+              IsRefreshing="{Binding Refreshing}">
        
         <ListView.ItemTemplate>
             <DataTemplate>
                 <TextCell Text="{Binding DisplayName}"
-                           Detail="{Binding Description}"/>
+                          Detail="{Binding Description}"/>
             </DataTemplate>
         </ListView.ItemTemplate>
     </ListView>
