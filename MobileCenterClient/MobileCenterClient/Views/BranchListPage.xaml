@@ -1,0 +1,38 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<v:BasePage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:local="clr-namespace:MobileCenterClient"
+             xmlns:vm="clr-namespace:MobileCenterClient.ViewModels"
+             xmlns:v="clr-namespace:MobileCenterClient.Views"
+             x:Class="MobileCenterClient.Views.BranchListPage"
+             Title="{Binding PageTitle}">
+    
+    <ListView x:Name="BranchListView"
+              ItemsSource="{Binding Branches}"
+              IsPullToRefreshEnabled="True"
+              RefreshCommand="{Binding RefreshBranchesCommand}"
+              IsRefreshing="{Binding Refreshing}">
+        
+        <ListView.ItemTemplate>
+            <DataTemplate>
+                <ViewCell>
+                    <StackLayout Orientation="Vertical" Padding="5,10">
+                        <Label Text="{Binding Branch.Name}" FontAttributes="Bold" FontSize="20"/>
+                        <StackLayout Orientation="Horizontal">
+                            <Label Text="Build status:"/>
+                            <Label Text="{Binding Status}" FontAttributes="Italic"/>
+                        </StackLayout>
+                        
+                        <Label Text="Latest commit:"/>
+                        <StackLayout Orientation="Vertical" Padding="5,0">
+                            <Label Text="{Binding Branch.Commit.Commit.Message}" FontAttributes="Italic"/>
+                            <Label Text="{Binding Branch.Commit.Commit.Author.Name}" FontAttributes="Italic"/>
+                            <Label Text="{Binding Branch.Commit.Commit.Author.Date}" FontAttributes="Italic"/>
+                        </StackLayout>
+                    </StackLayout>
+                </ViewCell>
+            </DataTemplate>
+        </ListView.ItemTemplate>
+    </ListView>
+
+</v:BasePage>

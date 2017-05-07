@@ -1,0 +1,32 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<v:BasePage xmlns="http://xamarin.com/schemas/2014/forms"
+            xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+            xmlns:local="clr-namespace:MobileCenterClient"
+            xmlns:vm="clr-namespace:MobileCenterClient.ViewModels"
+            xmlns:v="clr-namespace:MobileCenterClient.Views"
+            x:Class="MobileCenterClient.Views.AppListPage"
+            Title="Apps">
+    
+    <v:BasePage.BindingContext>
+        <vm:AppListViewModel/>
+    </v:BasePage.BindingContext>
+
+    <v:BasePage.ToolbarItems>
+        <ToolbarItem x:Name="SettingsToolbarItem" Text="Settings" />
+    </v:BasePage.ToolbarItems>
+    
+    <ListView x:Name="AppsListView"
+              ItemsSource="{Binding Apps}"
+              IsPullToRefreshEnabled="True"
+              RefreshCommand="{Binding RefreshAppsCommand}"
+              IsRefreshing="{Binding Refreshing}">
+       
+        <ListView.ItemTemplate>
+            <DataTemplate>
+                <TextCell Text="{Binding DisplayName}"
+                          Detail="{Binding Description}"/>
+            </DataTemplate>
+        </ListView.ItemTemplate>
+    </ListView>
+
+</v:BasePage>

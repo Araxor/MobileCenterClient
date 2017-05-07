@@ -1,0 +1,18 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<v:BasePage xmlns="http://xamarin.com/schemas/2014/forms"
+                xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+                xmlns:vm="clr-namespace:MobileCenterClient.ViewModels"
+                xmlns:v="clr-namespace:MobileCenterClient.Views;assembly=MobileCenterClient.Android"
+                x:Class="MobileCenterClient.Views.SettingsPage"
+                Title="Settings">
+    
+    <ContentPage.BindingContext>
+        <vm:SettingsViewModel/>
+    </ContentPage.BindingContext>
+    
+    <StackLayout Orientation="Vertical" Padding="5,10">
+        <Label Text="API token"/>
+        <Entry Text="{Binding ApiToken}"/>
+    </StackLayout>
+    
+</v:BasePage>
