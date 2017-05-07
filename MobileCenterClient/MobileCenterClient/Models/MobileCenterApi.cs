@@ -16,7 +16,6 @@ namespace MobileCenterClient.Models
     public class MobileCenterApi
     {
         public string Url { get; } = "https://api.mobile.azure.com";
-        private string Token { get; } = Secrets.MobileCenterApiKey;
 
         private readonly HttpClient _client;
         public JsonSerializerSettings SnakeCaseSerializerSettings { get; }
@@ -32,7 +31,7 @@ namespace MobileCenterClient.Models
             {
                 MaxResponseContentBufferSize = 256000,
                 BaseAddress = new Uri(Url),
-                DefaultRequestHeaders = { {"X-API-Token", Token} }
+                DefaultRequestHeaders = { {"X-API-Token", Settings.ApiToken} }
             };
 
             SnakeCaseSerializerSettings = new JsonSerializerSettings()
@@ -101,9 +100,7 @@ namespace MobileCenterClient.Models
             if (!response.IsSuccessStatusCode)
                 throw new FailedHttpResponseException(response);
 
-
             var content = await response.Content.ReadAsStringAsync();
-
             var deserialized = JsonConvert.DeserializeObject<T>(content, serializerSettings);
 
 #if DEBUG

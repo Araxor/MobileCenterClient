@@ -32,15 +32,21 @@
     <Compile Include="$(MSBuildThisFileDirectory)Models\UserProfile.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)ObservableObject.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Secrets.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Settings.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)ViewModels\BranchListViewModel.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)ViewModels\AppListViewModel.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)ViewModels\BaseViewModel.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)ViewModels\SettingsViewModel.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Views\AppListPage.xaml.cs">
       <DependentUpon>AppListPage.xaml</DependentUpon>
     </Compile>
     <Compile Include="$(MSBuildThisFileDirectory)Views\BasePage.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Views\BranchListPage.xaml.cs">
       <DependentUpon>BranchListPage.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="$(MSBuildThisFileDirectory)Views\SettingsPage.xaml.cs">
+      <DependentUpon>SettingsPage.xaml</DependentUpon>
+      <SubType>Code</SubType>
     </Compile>
   </ItemGroup>
   <ItemGroup>
@@ -59,5 +65,11 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="$(MSBuildThisFileDirectory)Models\JsonContractResolvers\" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="$(MSBuildThisFileDirectory)Views\SettingsPage.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
+    </EmbeddedResource>
   </ItemGroup>
 </Project>

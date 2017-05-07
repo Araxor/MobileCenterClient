@@ -23,9 +23,12 @@ namespace MobileCenterClient.Views
 	        MessagingCenter.Subscribe<BranchListViewModel>(this, Messages.ApiConnectionError, OnApiConnectionError);
 	    }
 
-	    private void OnApiConnectionError(BranchListViewModel viewModel)
+	    private async void OnApiConnectionError(BranchListViewModel viewModel)
 	    {
-	        DisplayAlert("Connection error", "Cannot connect to Mobile Center API.", "OK");
+	        if (await DisplayAlert("Connection error", "Cannot connect to Mobile Center API.", "Configure key", "Cancel"))
+	        {
+	            Navigation.PushAsync(new SettingsPage())
+	        }
 	    }
 
         protected override bool OnBackButtonPressed()

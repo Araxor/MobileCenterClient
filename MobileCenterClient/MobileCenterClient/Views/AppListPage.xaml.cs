@@ -24,20 +24,31 @@ namespace MobileCenterClient.Views
             // Navigate to branch list view on tapped item
 		    AppsListView.ItemTapped += OnItemTapped;
 
+            // 
+            SettingsToolbarItem.Clicked += OnSettingsToolbarItemClicked;
+
             // Subscribe to connection error message from the viewModel
             MessagingCenter.Subscribe<AppListViewModel>(this, Messages.ApiConnectionError, OnApiConnectionError);
 		}
 
-	    private async void OnItemTapped(object sender, ItemTappedEventArgs args)
+        private async void OnSettingsToolbarItemClicked(object sender, EventArgs e)
+        {
+            await Navigation.PushAsync(new SettingsPage());
+        }
+
+        private async void OnItemTapped(object sender, ItemTappedEventArgs args)
 	    {
 	        var page = PagesPerApp.GetOrCreate((Models.App) args.Item, () => new BranchListPage((Models.App) args.Item));
 
             await Navigation.PushAsync(page);
         }
 
-        private void OnApiConnectionError(AppListViewModel viewModel)
+        private async void OnApiConnectionError(AppListViewModel viewModel)
 	    {
-	        DisplayAlert("Connection error", "Cannot connect to Mobile Center API.", "OK");
-	    }
+	        if (await DisplayAlert("Connection error", "Cannot connect to Mobile Center API.", "Configure key", "Cancel"))
+	        {
+	            await Navigation.PushAsync(new SettingsPage());
+	        }
+        }
 	}
 }

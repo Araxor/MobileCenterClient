@@ -1,10 +1,10 @@
 ﻿{
   "dependencies": {
-    "Corcav.Behaviors": "2.3.7",
     "Microsoft.Azure.Mobile.Analytics": "0.10.0",
     "Microsoft.Azure.Mobile.Crashes": "0.10.0",
     "Microsoft.NETCore.UniversalWindowsPlatform": "5.2.2",
     "Newtonsoft.Json": "10.0.2",
+    "Xam.Plugins.Settings": "2.5.4",
     "Xamarin.Forms": "2.3.4.231"
   },
   "frameworks": {

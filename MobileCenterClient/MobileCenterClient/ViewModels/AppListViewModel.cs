@@ -7,6 +7,7 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Input;
 using MobileCenterClient.Models;
+using MobileCenterClient.Models.Exceptions;
 using MobileCenterClient.Models.MobileCenter;
 using MobileCenterClient.Views;
 using Xamarin.Forms;

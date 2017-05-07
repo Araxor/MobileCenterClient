@@ -8,10 +8,10 @@ namespace MobileCenterClient.Models
     {
         private int _id;
         private string _buildNumber;
-        private string _queueTime;
-        private string _startTime;
-        private string _finishTime;
-        private string _lastChangedDate;
+        private DateTime _queueTime;
+        private DateTime _startTime;
+        private DateTime _finishTime;
+        private DateTime _lastChangedDate;
         private string _status;
         private string _result;
         private string _sourceBranch;
@@ -39,7 +39,7 @@ namespace MobileCenterClient.Models
             }
         }
 
-        public string QueueTime
+        public DateTime QueueTime
         {
             get => _queueTime;
             set
@@ -50,7 +50,7 @@ namespace MobileCenterClient.Models
             }
         }
 
-        public string StartTime
+        public DateTime StartTime
         {
             get => _startTime;
             set
@@ -61,7 +61,7 @@ namespace MobileCenterClient.Models
             }
         }
 
-        public string FinishTime
+        public DateTime FinishTime
         {
             get => _finishTime;
             set
@@ -72,7 +72,7 @@ namespace MobileCenterClient.Models
             }
         }
 
-        public string LastChangedDate
+        public DateTime LastChangedDate
         {
             get => _lastChangedDate;
             set
